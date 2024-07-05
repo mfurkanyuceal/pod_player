@@ -13,9 +13,13 @@ import '../utils/logger.dart';
 import '../utils/video_apis.dart';
 
 part 'pod_base_controller.dart';
+
 part 'pod_gestures_controller.dart';
+
 part 'pod_ui_controller.dart';
+
 part 'pod_video_controller.dart';
+
 part 'pod_video_quality_controller.dart';
 
 class PodGetXVideoController extends _PodGesturesController {
@@ -39,6 +43,7 @@ class PodGetXVideoController extends _PodGesturesController {
   bool controllerInitialized = false;
   late PodPlayerConfig podPlayerConfig;
   late PlayVideoFrom playVideoFrom;
+
   void config({
     required PlayVideoFrom playVideoFrom,
     required PodPlayerConfig playerConfig,
@@ -136,6 +141,7 @@ class PodGetXVideoController extends _PodGesturesController {
         await getQualityUrlsFromVimeoId(
           playVideoFrom.dataSource!,
           hash: playVideoFrom.hash,
+          headers: playVideoFrom.httpHeaders,
         );
         final url = await getUrlFromVideoQualityUrls(
           qualityList: podPlayerConfig.videoQualityPriority,
