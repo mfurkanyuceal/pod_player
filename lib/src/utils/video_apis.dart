@@ -12,24 +12,31 @@ String podErrorString(String val) {
 }
 
 class VideoApis {
-  static Future<Response> _makeRequestHash(String videoId, String? hash) {
+  static Future<Response> _makeRequestHash(
+    String videoId,
+    String? hash, {
+    Map<String, String>? headers,
+  }) {
     if (hash == null) {
       return http.get(
         Uri.parse('https://player.vimeo.com/video/$videoId/config'),
+        headers: headers,
       );
     } else {
       return http.get(
         Uri.parse('https://player.vimeo.com/video/$videoId/config?h=$hash'),
+        headers: headers,
       );
     }
   }
 
   static Future<List<VideoQalityUrls>?> getVimeoVideoQualityUrls(
     String videoId,
-    String? hash,
-  ) async {
+    String? hash, {
+    Map<String, String>? headers,
+  }) async {
     try {
-      final response = await _makeRequestHash(videoId, hash);
+      final response = await _makeRequestHash(videoId, hash, headers: headers);
       final jsonData = jsonDecode(response.body)['request']['files'];
       final dashData = jsonData['dash'];
       final hlsData = jsonData['hls'];

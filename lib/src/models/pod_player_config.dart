@@ -3,6 +3,7 @@ class PodPlayerConfig {
   final bool isLooping;
   final bool forcedVideoFocus;
   final bool wakelockEnabled;
+  final Map<String, String>? vimeoURLHeaders;
 
   /// Initial video quality priority. The first available option will be used,
   /// from start to the end of this list. If all options informed are not
@@ -17,6 +18,7 @@ class PodPlayerConfig {
     this.forcedVideoFocus = false,
     this.wakelockEnabled = true,
     this.videoQualityPriority = const [1080, 720, 360],
+    this.vimeoURLHeaders,
   });
 
   PodPlayerConfig copyWith({
@@ -25,6 +27,7 @@ class PodPlayerConfig {
     bool? forcedVideoFocus,
     bool? wakelockEnabled,
     List<int>? videoQualityPriority,
+    Map<String, String>? vimeoURLHeaders,
   }) {
     return PodPlayerConfig(
       autoPlay: autoPlay ?? this.autoPlay,
@@ -32,6 +35,7 @@ class PodPlayerConfig {
       forcedVideoFocus: forcedVideoFocus ?? this.forcedVideoFocus,
       wakelockEnabled: wakelockEnabled ?? this.wakelockEnabled,
       videoQualityPriority: videoQualityPriority ?? this.videoQualityPriority,
+      vimeoURLHeaders: vimeoURLHeaders ?? this.vimeoURLHeaders,
     );
   }
 }

@@ -29,6 +29,7 @@ class VimeoVideoViewer extends StatefulWidget {
 class VimeoVideoViewerState extends State<VimeoVideoViewer> {
   late final PodPlayerController controller;
   bool isLoading = true;
+
   @override
   void initState() {
     loadVideo();
@@ -36,7 +37,10 @@ class VimeoVideoViewerState extends State<VimeoVideoViewer> {
   }
 
   void loadVideo() async {
-    final urls = await PodPlayerController.getVimeoUrls('518228118');
+    final urls = await PodPlayerController.getVimeoUrls(
+      '518228118',
+      headers: controller.podPlayerConfig.vimeoURLHeaders,
+    );
     setState(() => isLoading = false);
     controller = PodPlayerController(
       playVideoFrom: PlayVideoFrom.networkQualityUrls(videoUrls: urls!),
